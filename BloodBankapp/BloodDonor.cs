@@ -6,52 +6,53 @@ using System.Threading.Tasks;
 
 namespace BloodBankapp
 {
-    enum BloodGroupType
+    public enum BloodGroupType
     {
         O,
         A,
         B,
         AB
     }
-    enum RHfactorType
+    public enum RHfactorType
     {
         positive,
         negative
 
     }
-    enum GenderType
+    public enum GenderType
     {
         Male,
         Female
 
     }
 
-    
+
     /// <summary>
     /// this represent a blooddonor profile
     /// </summary>
-    class BloodDonor
+    public class BloodDonor
     {
 
-        private static int lastdonorID =100;
-        
-        #region Properties
+        private static int lastdonorID = 1000;
 
+        #region Properties
         public int DonorId { get; private set; }
 
-        public string DonorName { get; set; }
+        public string DonorFirstName { get; set; }
+
+        public string DonorLastName { get; set; }
 
         public DateTime DateOfBirth { get; set; }
 
         public int DonorAge { get; set; }
 
-        public DateTime LastBloodDonate { get; set; }
-
         public GenderType TypeofGender { get; set; }
 
-        public int DonorBloodRecord { get; private set; }
+        public int DonorBloodRecord { get; set; }
 
-        public DateTime RegisteredDate { get;  private set; }
+        public DateTime RegisteredDate { get; private set; }
+
+        public int BloodUnit { get; private set; }
 
         public BloodGroupType BloodGroup { get; set; }
 
@@ -65,17 +66,17 @@ namespace BloodBankapp
         public BloodDonor()
         {
             DonorId = ++lastdonorID;
-            RegisteredDate =DateTime.UtcNow;
+            RegisteredDate = DateTime.UtcNow;
         }
         #endregion
 
         #region Methods
 
 
-        public int BloodDonation(int Unit)
+        public int BloodDonation(int BloodUnit)
 
         {
-            DonorBloodRecord += Unit;
+            DonorBloodRecord += BloodUnit;
             return DonorBloodRecord;
         }
         #endregion
