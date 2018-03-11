@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/BloodBankapp/bin/Debug
+/BloodBankapp/obj/Debug
+/.vs/BloodBankapp/v15/Server/sqlite3
