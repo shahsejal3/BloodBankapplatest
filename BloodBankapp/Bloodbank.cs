@@ -8,7 +8,21 @@ namespace BloodBankapp
 {
     static class Bloodbank
     {
-        private static List<BloodDonor> blooddonors = new List<BloodDonor>();
+        private static BloodBankModel db = new BloodBankModel();
+
+        /// <summary>
+        /// Creates BloodDonor profile
+        /// </summary>
+        /// <param name="Donorfirstname"></param>
+        /// <param name="Donorlastname"></param>
+        /// <param name="Donorgender"></param>
+        /// <param name="Donorage"></param>
+        /// <param name="groupType"></param>
+        /// <param name="rHfactorType"></param>
+        /// <param name="emailAddress"></param>
+        /// <returns> New Blood Donor profile</returns>
+        /// <exception cref="System.ArgumentNullException"/>
+        /// <exception cref="System.ArgumentOutOfRangeException"/>
 
 
         public static BloodDonor CreateBloodDonor(string Donorfirstname,
@@ -17,6 +31,19 @@ namespace BloodBankapp
         RHfactorType rHfactorType,
         string emailAddress)
         {
+            if (String.IsNullOrEmpty(Donorfirstname)
+                || String.IsNullOrWhiteSpace(Donorfirstname))
+             {
+                throw new ArgumentNullException("Donorfirstname", "Donorfirstname cannot be Empty");
+
+             }
+
+           
+            
+
+        
+                     
+
             var blooddonor = new BloodDonor
             {
                 DonorFirstName = Donorfirstname,
@@ -29,9 +56,13 @@ namespace BloodBankapp
 
 
             };
-            if (Donorage >= 18)
-                blooddonors.Add(blooddonor);
-            return blooddonor;
+            if (Donorage < 17)
+            {
+                throw new ArgumentOutOfRangeException("DonorAge", "Minimum Blood Donor Age Requirement is 17");
+            }
+                db.BloodDonors.Add(blooddonor);
+                db.SaveChanges();
+                return blooddonor;
 
 
         }
@@ -39,13 +70,13 @@ namespace BloodBankapp
 
         public static IEnumerable<BloodDonor> GetBloodDonors()
         {
-            return blooddonors;
+            return db.BloodDonors;
         }
 
         public static BloodDonor GetBloodDonorByDonorId(int? donorId)
 
         {
-            var blooddonor = blooddonors.Where(d => d.DonorId == donorId).FirstOrDefault();
+            var blooddonor = db.BloodDonors.Where(d => d.DonorId == donorId).FirstOrDefault();
             if (donorId == null)
                 return null;
             return blooddonor;
@@ -62,7 +93,7 @@ namespace BloodBankapp
         }
 
 
-        public static BloodDonor GetBloodDonorRecords(int donorId, int BloodUnit)
+        public static BloodDonor DisplayBloodDonorRecords(int donorId, int BloodUnit)
         {
             var blooddonor = BloodDonation(donorId, BloodUnit);
             return DonorBloodRecords();
@@ -79,6 +110,11 @@ namespace BloodBankapp
             throw new NotImplementedException();
         }
 
+       
+
+        
+
     }
+
 }
 
