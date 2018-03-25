@@ -42,10 +42,8 @@ namespace BloodBankapp
                         var genderType = Convert.ToInt32(Console.ReadLine());
                         
                         
-                            Console.Write("Age:-");
-                            var Donorage = Convert.ToInt32(Console.ReadLine());
-                        
-               
+                        Console.Write("Age:-");
+                        var Donorage = Convert.ToInt32(Console.ReadLine());
                         var bloodGrouptypes = Enum.GetNames(typeof(BloodGroupType));
                         for (int i = 0; i < bloodGrouptypes.Length; i++)
                         {
@@ -86,7 +84,7 @@ namespace BloodBankapp
                         break;
 
                     case "2":
-
+                        PrintDonorRecords();
                         Console.Write("Please Enter DonorID:-");
                         var donorId = Convert.ToInt32(Console.ReadLine());
                         Console.Write("Blood Donation in Unit:-");
@@ -126,7 +124,7 @@ namespace BloodBankapp
             {
                 Console.WriteLine($"DonorID:{bloodDonor.DonorId},FirstName:{bloodDonor.DonorFirstName},LastName:{bloodDonor.DonorLastName}," +
                 $"Gender:{bloodDonor.TypeofGender},Age:{bloodDonor.DonorAge},BloodGroup:{bloodDonor.BloodGroup}," +
-                $"RHFactor:{bloodDonor.RHFactor},EmailAddress:{bloodDonor.EmailAddress},Total BloodUnit:{bloodDonor.BloodUnit}");
+                $"RHFactor:{bloodDonor.RHFactor},EmailAddress:{bloodDonor.EmailAddress}");
             }
         }
     }

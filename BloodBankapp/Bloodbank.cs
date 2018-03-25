@@ -22,8 +22,7 @@ namespace BloodBankapp
         /// <param name="emailAddress"></param>
         /// <returns> New Blood Donor profile</returns>
         /// <exception cref="System.ArgumentNullException"/>
-        /// <exception cref="System.ArgumentOutOfRangeException"/>
-
+        ///<exception cref="System.NotImplementedException"/>
 
         public static BloodDonor CreateBloodDonor(string Donorfirstname,
         string Donorlastname, GenderType Donorgender,
@@ -37,12 +36,10 @@ namespace BloodBankapp
                 throw new ArgumentNullException("Donorfirstname", "Donorfirstname cannot be Empty");
 
              }
-
-           
-            
-
-        
-                     
+            if (Donorage < 17)
+            {
+                throw new ArgumentOutOfRangeException("Donorage", "Sorry Minimum Donorage requirements in 17");
+            }
 
             var blooddonor = new BloodDonor
             {
@@ -56,10 +53,7 @@ namespace BloodBankapp
 
 
             };
-            if (Donorage < 17)
-            {
-                throw new ArgumentOutOfRangeException("DonorAge", "Minimum Blood Donor Age Requirement is 17");
-            }
+           
                 db.BloodDonors.Add(blooddonor);
                 db.SaveChanges();
                 return blooddonor;
@@ -86,18 +80,20 @@ namespace BloodBankapp
         public static void BloodDonation(int donorId)
         {
 
-            int BloodUnit = 0;
+           
             var blooddonor = GetBloodDonorByDonorId(donorId);
+            int BloodUnit = 0;
             blooddonor.BloodDonation(BloodUnit);
+          
 
         }
 
 
         public static BloodDonor DisplayBloodDonorRecords(int donorId, int BloodUnit)
         {
-            var blooddonor = BloodDonation(donorId, BloodUnit);
-            return DonorBloodRecords();
-
+            var blooddonor = GetBloodDonorByDonorId(donorId);
+            blooddonor.BloodDonation(BloodUnit);
+                return DonorBloodRecords();
         }
 
         private static object BloodDonation(int donorId, int bloodUnit)

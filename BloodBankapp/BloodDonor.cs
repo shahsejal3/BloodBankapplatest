@@ -57,7 +57,7 @@ namespace BloodBankapp
 
         public int DonorBloodRecord { get; set; }
 
-        public DateTime RegisteredDate { get; private set; }
+        public DateTime RegisteredDate { get;  set; }
 
         public int BloodUnit { get; private set; }
 
@@ -65,7 +65,7 @@ namespace BloodBankapp
 
         public RHfactorType RHFactor { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+        [Required]
         public string EmailAddress { get; set; }
 
         #endregion
